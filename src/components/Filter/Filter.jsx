@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Filter = ({ list, query }) => {
+export const Filter = ({ list, query, onClick }) => {
   return (
     <ul className="contactList">
       {list
@@ -13,7 +13,9 @@ export const Filter = ({ list, query }) => {
             <p>
               {name}: {number}
             </p>
-            <button>delete</button>
+            <button id={id} onClick={onClick}>
+              delete
+            </button>
           </li>
         ))}
     </ul>

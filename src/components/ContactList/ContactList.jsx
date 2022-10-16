@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ContactList = ({ list }) => {
+export const ContactList = ({ list, onClick }) => {
   return (
     <ul className="contactList">
       {list
@@ -10,7 +10,9 @@ export const ContactList = ({ list }) => {
             <p>
               {name}: {number}
             </p>
-            <button>delete</button>
+            <button id={id} onClick={onClick}>
+              delete
+            </button>
           </li>
         ))}
     </ul>

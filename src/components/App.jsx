@@ -27,6 +27,14 @@ export class App extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  deleteContactByClick = event => {
+    this.setState({
+      contacts: this.state.contacts.filter(
+        contact => contact.id != event.target.id
+      ),
+    });
+  };
+
   render() {
     return (
       <div className={css.app}>
@@ -44,9 +52,16 @@ export class App extends React.Component {
             onChange={this.handleInputChange}
           />
           {this.state.filter.length > 0 ? (
-            <Filter query={this.state.filter} list={this.state.contacts} />
+            <Filter
+              query={this.state.filter}
+              list={this.state.contacts}
+              onClick={this.deleteContactByClick}
+            />
           ) : (
-            <ContactList list={this.state.contacts} />
+            <ContactList
+              list={this.state.contacts}
+              onClick={this.deleteContactByClick}
+            />
           )}
         </Section>
       </div>
