@@ -19,6 +19,15 @@ export class ContactForm extends React.Component {
   handleSubmitForm = event => {
     event.preventDefault();
 
+    if (
+      this.props.contacts.filter(
+        contact => contact.name === event.target.elements.name.value
+      ).length > 0
+    ) {
+      alert(`${event.target.elements.name.value} is already in contacts.`);
+      return;
+    }
+
     const newContact = {
       id: nanoid(10),
       name: event.target.elements.name.value,

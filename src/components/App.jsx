@@ -30,7 +30,7 @@ export class App extends React.Component {
   deleteContactByClick = event => {
     this.setState({
       contacts: this.state.contacts.filter(
-        contact => contact.id != event.target.id
+        contact => contact.id !== event.target.id
       ),
     });
   };
@@ -39,7 +39,10 @@ export class App extends React.Component {
     return (
       <div className={css.app}>
         <Section title="Phonebook">
-          <ContactForm onSubmit={this.formSubmitHandler} />
+          <ContactForm
+            onSubmit={this.formSubmitHandler}
+            contacts={this.state.contacts}
+          />
         </Section>
         <Section title="Contacts">
           <Input
