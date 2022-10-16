@@ -3,6 +3,7 @@ import React from 'react';
 
 // import { nanoid } from 'nanoid';
 import { Input } from 'components/Input/Input';
+import { nanoid } from 'nanoid';
 
 export class ContactForm extends React.Component {
   state = {
@@ -18,9 +19,13 @@ export class ContactForm extends React.Component {
   handleSubmitForm = event => {
     event.preventDefault();
 
-    // this.state.id = nanoid(10);
+    const newContact = {
+      id: nanoid(10),
+      name: event.target.elements.name.value,
+      number: event.target.elements.number.value,
+    };
 
-    this.props.onSubmit(this.state);
+    this.props.onSubmit(newContact);
 
     this.reset();
   };
