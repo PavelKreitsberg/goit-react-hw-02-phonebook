@@ -4,6 +4,8 @@ import css from '../components/App.module.css';
 import { Section } from './Section/Section';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
+import { Filter } from './Filter/Filter';
+import { Input } from './Input/Input';
 
 export class App extends React.Component {
   state = {
@@ -21,6 +23,10 @@ export class App extends React.Component {
     this.setState({ contacts: this.state.contacts });
   };
 
+  handleInputChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   render() {
     return (
       <div className={css.app}>
@@ -28,7 +34,20 @@ export class App extends React.Component {
           <ContactForm onSubmit={this.formSubmitHandler} />
         </Section>
         <Section title="Contacts">
-          <ContactList list={this.state.contacts} />
+          <Input
+            type="text"
+            label="find contacts by name"
+            name="filter"
+            value={this.state.filter}
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            onChange={this.handleInputChange}
+          />
+          {this.state.filter.length > 0 ? (
+            <Filter query={this.state.filter} list={this.state.contacts} />
+          ) : (
+            <ContactList list={this.state.contacts} />
+          )}
         </Section>
       </div>
     );
