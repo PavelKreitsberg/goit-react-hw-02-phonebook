@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import css from '../Filter/Filter.module.css';
 
 export const Filter = ({ list, query, onClick }) => {
   return (
@@ -9,8 +11,8 @@ export const Filter = ({ list, query, onClick }) => {
           contact.name.toUpperCase().includes(query.toUpperCase())
         )
         .map(({ id, name, number }) => (
-          <li key={id}>
-            <p>
+          <li key={id} className={css.item}>
+            <p className={css.item__text}>
               {name}: {number}
             </p>
             <button id={id} onClick={onClick}>
@@ -20,4 +22,10 @@ export const Filter = ({ list, query, onClick }) => {
         ))}
     </ul>
   );
+};
+
+Filter.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.object),
+  query: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
 };

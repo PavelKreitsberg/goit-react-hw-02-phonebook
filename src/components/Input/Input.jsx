@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import css from '../Input/Input.module.css';
 
 export const Input = ({
@@ -15,6 +15,7 @@ export const Input = ({
     <label className={css.label}>
       {label}
       <input
+        className={css.input}
         type={type}
         name={name}
         value={value}
@@ -25,4 +26,14 @@ export const Input = ({
       />
     </label>
   );
+};
+
+Input.propTypes = {
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  pattern: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };

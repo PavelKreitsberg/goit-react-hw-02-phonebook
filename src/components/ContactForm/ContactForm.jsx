@@ -1,7 +1,6 @@
 import React from 'react';
-// import css from '../ContactForm/ContactForm.module.css';
+import css from '../ContactForm/ContactForm.module.css';
 
-// import { nanoid } from 'nanoid';
 import { Input } from 'components/Input/Input';
 import { nanoid } from 'nanoid';
 
@@ -68,7 +67,9 @@ export class ContactForm extends React.Component {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         />
-        <button type="submit">Add contact</button>
+        <button type="submit" className={css.form__btn}>
+          Add contact
+        </button>
       </form>
     );
   }
