@@ -2,11 +2,9 @@ import React from 'react';
 import css from '../ContactForm/ContactForm.module.css';
 
 import { Input } from 'components/Input/Input';
-import { nanoid } from 'nanoid';
 
 export class ContactForm extends React.Component {
   state = {
-    id: '',
     name: '',
     number: '',
   };
@@ -28,7 +26,6 @@ export class ContactForm extends React.Component {
     }
 
     const newContact = {
-      id: nanoid(10),
       name: event.target.elements.name.value,
       number: event.target.elements.number.value,
     };

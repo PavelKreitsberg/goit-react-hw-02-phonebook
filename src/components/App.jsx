@@ -6,6 +6,7 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
 import { Input } from './Input/Input';
+import { nanoid } from 'nanoid';
 
 export class App extends React.Component {
   state = {
@@ -19,6 +20,7 @@ export class App extends React.Component {
   };
 
   formSubmitHandler = data => {
+    data.id = nanoid(10);
     this.state.contacts.push(data);
     this.setState({ contacts: this.state.contacts });
   };
