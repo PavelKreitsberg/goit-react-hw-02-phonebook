@@ -5,7 +5,7 @@ import { Section } from './Section/Section';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-import { Input } from './Input/Input';
+// import { Input } from './Input/Input';
 import { nanoid } from 'nanoid';
 
 export class App extends React.Component {
@@ -47,27 +47,12 @@ export class App extends React.Component {
           />
         </Section>
         <Section title="Contacts">
-          <Input
-            type="text"
-            label="find contacts by name"
-            name="filter"
-            value={this.state.filter}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            onChange={this.handleInputChange}
+          <Filter query={this.state.filter} onChange={this.handleInputChange} />
+          <ContactList
+            query={this.state.filter}
+            list={this.state.contacts}
+            onClick={this.deleteContactByClick}
           />
-          {this.state.filter.length > 0 ? (
-            <Filter
-              query={this.state.filter}
-              list={this.state.contacts}
-              onClick={this.deleteContactByClick}
-            />
-          ) : (
-            <ContactList
-              list={this.state.contacts}
-              onClick={this.deleteContactByClick}
-            />
-          )}
         </Section>
       </div>
     );
