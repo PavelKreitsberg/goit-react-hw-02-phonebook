@@ -19,17 +19,18 @@ export class App extends React.Component {
   };
 
   formSubmitHandler = data => {
-    if (
-      this.state.contacts.filter(contact => contact.name === data.name).length >
-      0
-    ) {
+    const inContacts = this.state.contacts.find(
+      contact => contact.name === data.name
+    );
+
+    if (inContacts) {
       alert(`${data.name} is already in contacts.`);
       return;
     }
 
-    data.id = nanoid(10);
-    this.state.contacts.push(data);
-    this.setState({ contacts: this.state.contacts });
+    this.setState(prevState => {
+      return { contacts: [...prevState.contacts, { ...data, id: nanoid(10) }] };
+    });
   };
 
   handleInputChange = event => {
@@ -44,20 +45,27 @@ export class App extends React.Component {
     });
   };
 
+  filterContactListByQuery = () => {
+    const { filter, contacts } = this.state;
+    if (filter.trim()) {
+      return contacts.filter(contact =>
+        contact.name.toUpperCase().includes(filter.toUpperCase().trim())
+      );
+    }
+
+    return contacts;
+  };
+
   render() {
     return (
       <div className={css.app}>
         <Section title="Phonebook">
-          <ContactForm
-            onSubmit={this.formSubmitHandler}
-            contacts={this.state.contacts}
-          />
+          <ContactForm onSubmit={this.formSubmitHandler} />
         </Section>
         <Section title="Contacts">
           <Filter query={this.state.filter} onChange={this.handleInputChange} />
           <ContactList
-            query={this.state.filter}
-            list={this.state.contacts}
+            list={this.filterContactListByQuery()}
             onClick={this.deleteContactByClick}
           />
         </Section>
